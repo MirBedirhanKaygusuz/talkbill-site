@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talkbill — Support</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1c1c1e; --muted: #6b6b70;
+    --accent: #34c759; --card: #f5f5f7; --line: #e3e3e6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #000000; --fg: #f2f2f7; --muted: #9a9aa0;
+            --accent: #30d158; --card: #1c1c1e; --line: #2c2c2e; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2.5rem 1.25rem 4rem;
+    background: var(--bg); color: var(--fg);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 42rem; margin: 0 auto; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .35rem; letter-spacing: -.02em; }
+  .sub { color: var(--muted); margin-bottom: 2rem; }
+  h2 { font-size: 1.15rem; margin: 2rem 0 .5rem; letter-spacing: -.01em; }
+  details {
+    background: var(--card); border-radius: 12px; padding: .9rem 1.1rem; margin: .6rem 0;
+  }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin: .7rem 0 .2rem; }
+  .contact {
+    background: var(--card); border-radius: 14px; padding: 1.25rem;
+    border-left: 4px solid var(--accent); margin: 2rem 0;
+  }
+  code { background: var(--card); padding: .1rem .35rem; border-radius: 5px; font-size: .9em; }
+  a { color: var(--accent); }
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Talkbill Support</h1>
+  <p class="sub">Speak the job, get the invoice.</p>
+
+  <div class="contact">
+    <strong>Email:</strong>
+    <a href="mailto:kaygusuzmir79@gmail.com">kaygusuzmir79@gmail.com</a><br>
+    A real person reads these. If something came out wrong on an invoice, the fastest
+    fix is below — send the debug report, not a screenshot.
+  </div>
+
+  <h2>Getting a good result</h2>
+
+  <details>
+    <summary>How should I say a job?</summary>
+    <p>
+      Talk the way you'd tell a mate. Say who it's for, what you did, and what it
+      costs: <em>"Invoice for Sarah Mitchell. Kitchen sink repair, parts eighty five
+      dollars, labour two hours at ninety five an hour."</em>
+    </p>
+    <p>
+      Saying "at" before an hourly rate ("two hours <em>at</em> ninety five") removes
+      most ambiguity — without it, Talkbill often has to ask whether you meant two
+      items or one.
+    </p>
+  </details>
+
+  <details>
+    <summary>I said the wrong number. Can I correct myself out loud?</summary>
+    <p>
+      Yes. Say <em>"actually, make that three hours"</em> or <em>"no wait, eighty
+      dollars"</em> and Talkbill changes the line instead of adding a new one. If it
+      can't tell what you meant to change, it asks rather than guessing.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I do several jobs in one go?</summary>
+    <p>
+      Yes. Start each one with "Invoice for &lt;name&gt;" and Talkbill splits the
+      recording into separate invoices for separate customers.
+    </p>
+  </details>
+
+  <details>
+    <summary>Why is a line marked "Needs review"?</summary>
+    <p>
+      Because Talkbill wasn't certain, and it will not quietly send an invoice it
+      isn't sure about. "Two smoke alarms thirty five dollars" could be 2 × $35 or a
+      single $35 — so it shows both and you tap the right one. A document with an
+      open question can't be sent until you answer it.
+    </p>
+  </details>
+
+  <h2>Problems</h2>
+
+  <details>
+    <summary>It isn't hearing me</summary>
+    <p>
+      Check that Talkbill has microphone access in iOS Settings → Privacy &amp;
+      Security → Microphone. On a noisy site, hold the phone closer and speak in short
+      sentences — pause briefly between line items.
+    </p>
+  </details>
+
+  <details>
+    <summary>"Language pack not ready"</summary>
+    <p>
+      iOS downloads the on-device speech pack once, over Wi-Fi, and keeps it. Connect
+      to Wi-Fi and try again. Once it's installed, Talkbill works with no signal at
+      all.
+    </p>
+  </details>
+
+  <details>
+    <summary>The invoice came out wrong</summary>
+    <p>
+      On a draft, scroll to the bottom and tap <strong>Copy debug report</strong>, then
+      paste it into an email to us. It contains exactly what was heard and what was
+      extracted — that's far more useful than a screenshot, and it usually becomes a
+      permanent fix rather than a one-off answer.
+    </p>
+  </details>
+
+  <details>
+    <summary>My invoices aren't on my other device</summary>
+    <p>
+      Open Settings inside Talkbill and check the <strong>iCloud sync</strong> line. If
+      it says Off, sign in to iCloud on the device. Talkbill works fine without it —
+      everything simply stays on that one phone.
+    </p>
+  </details>
+
+  <h2>Billing</h2>
+
+  <details>
+    <summary>What's free?</summary>
+    <p>
+      Your first invoice — and it stays yours forever. Reading your archive, editing,
+      marking invoices paid, and exporting to PDF or CSV are never locked, subscription
+      or not.
+    </p>
+  </details>
+
+  <details>
+    <summary>How do I cancel?</summary>
+    <p>
+      iOS Settings → tap your name → Subscriptions → Talkbill → Cancel. One tap, no
+      email to write, nothing to ask us for. Cancelling never deletes your invoices.
+    </p>
+  </details>
+
+  <details>
+    <summary>I bought Lifetime and it's not showing</summary>
+    <p>
+      Open the paywall and tap <strong>Restore</strong>, signed in to the same Apple
+      account you bought with. If it still doesn't appear, email us.
+    </p>
+  </details>
+
+  <h2>What Talkbill doesn't do</h2>
+  <p>
+    Talkbill writes invoices and tracks what you're owed. It does not do your taxes,
+    doesn't connect to your bank, and doesn't give financial advice. Any tax or
+    discount percentage on an invoice is the one you said out loud.
+  </p>
+
+  <footer>
+    Talkbill · <a href="privacy.html">Privacy Policy</a>
+  </footer>
+</main>
+</body>
+</html>
