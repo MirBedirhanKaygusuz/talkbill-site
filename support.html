@@ -4,172 +4,415 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Talkbill — Support</title>
+<meta name="description" content="Help with Talkbill: getting a good result, fixing problems, billing, and how to reach us.">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
 <style>
   :root {
-    --bg: #ffffff; --fg: #1c1c1e; --muted: #6b6b70;
-    --accent: #34c759; --card: #f5f5f7; --line: #e3e3e6;
+    --bg: #f2f3f5; --card: #ffffff; --fg: #15191a; --muted: #5f6669;
+    --line: #e2e5e8; --link: #0b8a5e; --mint: #2ed9a8; --ink: #14201c;
+    --hero-fg: #ffffff; --hero-muted: #b9c7c2; --shadow: 0 1px 2px rgba(20,32,28,.06), 0 8px 24px rgba(20,32,28,.06);
+    --tip: #e9f9f2; --tip-line: #bfeedd;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #000000; --fg: #f2f2f7; --muted: #9a9aa0;
-            --accent: #30d158; --card: #1c1c1e; --line: #2c2c2e; }
+    :root {
+      --bg: #0b0f0e; --card: #161c1a; --fg: #edf2f0; --muted: #9aa4a0;
+      --line: #26302c; --link: #5be3b8; --shadow: none;
+      --tip: #12261f; --tip-line: #1f4336;
+    }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0; padding: 2.5rem 1.25rem 4rem;
-    background: var(--bg); color: var(--fg);
-    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 42rem; margin: 0 auto; }
-  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .35rem; letter-spacing: -.02em; }
-  .sub { color: var(--muted); margin-bottom: 2rem; }
-  h2 { font-size: 1.15rem; margin: 2rem 0 .5rem; letter-spacing: -.01em; }
-  details {
-    background: var(--card); border-radius: 12px; padding: .9rem 1.1rem; margin: .6rem 0;
+  a { color: var(--link); text-underline-offset: 2px; }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1rem; }
+
+  /* Hero */
+  header {
+    background: var(--ink); color: var(--hero-fg);
+    padding: 2.5rem 0 4.5rem;
   }
-  summary { cursor: pointer; font-weight: 600; }
-  details p { margin: .7rem 0 .2rem; }
+  .brand { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.75rem; }
+  .brand img { width: 44px; height: 44px; border-radius: 11px; display: block; }
+  .brand a { color: var(--hero-fg); text-decoration: none; font-weight: 650; font-size: 1.05rem; }
+  .brand span { color: var(--hero-muted); font-weight: 500; }
+  h1 {
+    font-size: clamp(2rem, 7vw, 2.75rem); line-height: 1.08; letter-spacing: -.03em;
+    font-weight: 800; margin: 0 0 .6rem;
+  }
+  h1 em { font-style: normal; color: var(--mint); }
+  .lead { color: var(--hero-muted); margin: 0; max-width: 32rem; }
+
+  /* Contact card */
   .contact {
-    background: var(--card); border-radius: 14px; padding: 1.25rem;
-    border-left: 4px solid var(--accent); margin: 2rem 0;
+    scroll-margin-top: 1rem;
+    background: var(--card); border-radius: 18px; box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    padding: 1.35rem 1.35rem 1.4rem; margin-top: -3rem; position: relative;
   }
-  code { background: var(--card); padding: .1rem .35rem; border-radius: 5px; font-size: .9em; }
-  a { color: var(--accent); }
-  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
-           color: var(--muted); font-size: .9rem; }
+  .contact.form-card { margin-top: 2.5rem; }
+  .form-card > p { margin-bottom: .25rem; }
+  .contact h2 { margin: 0 0 .3rem; font-size: 1.2rem; letter-spacing: -.01em; }
+  .contact > p { margin: 0 0 1rem; color: var(--muted); }
+  .btn {
+    display: inline-flex; align-items: center; gap: .55rem;
+    background: var(--mint); color: #0b1411; font-weight: 650; text-decoration: none;
+    padding: .8rem 1.25rem; border-radius: 999px; max-width: 100%;
+  }
+  .btn:hover { filter: brightness(1.05); }
+  button.btn { border: 0; font: inherit; font-weight: 650; cursor: pointer; margin-top: 1.25rem; }
+  button.btn:disabled { opacity: .6; cursor: progress; }
+
+  /* Form */
+  form label { display: block; font-weight: 600; font-size: .95rem; margin: 1rem 0 .35rem; }
+  form .opt { color: var(--muted); font-weight: 500; }
+  form input[type=email], form select, form textarea {
+    display: block; width: 100%; font: inherit; font-size: 16px; color: var(--fg);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+    padding: .7rem .85rem; appearance: none; -webkit-appearance: none;
+  }
+  form select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                      linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 1.25rem) 55%, calc(100% - .95rem) 55%;
+    background-size: .32rem .32rem; background-repeat: no-repeat; padding-right: 2.5rem;
+  }
+  form textarea { resize: vertical; min-height: 7.5rem; }
+  form input:focus, form select:focus, form textarea:focus {
+    outline: none; border-color: var(--link); box-shadow: 0 0 0 3px rgba(46,217,168,.25);
+  }
+  form input[type=file] { font: inherit; font-size: .95rem; color: var(--muted); max-width: 100%; }
+  form input[type=file]::file-selector-button {
+    font: inherit; font-weight: 600; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 999px; padding: .45rem .9rem; margin-right: .75rem; cursor: pointer;
+  }
+  .hint { display: block; color: var(--muted); font-size: .88rem; margin-top: .3rem; }
+  .hint.err { color: #c2410c; }
+  .fine { font-size: .85rem; color: var(--muted); margin: .9rem 0 0; }
+  .honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .sent {
+    background: var(--tip); border: 1px solid var(--tip-line); border-radius: 14px;
+    padding: .9rem 1.1rem; margin-bottom: 1rem;
+  }
+  .sent strong { display: block; }
+  .btn svg { flex: none; }
+  .btn span { overflow-wrap: anywhere; }
+
+  /* Jump links */
+  nav.jump { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.75rem 0 .5rem; }
+  nav.jump a {
+    text-decoration: none; color: var(--fg); background: var(--card);
+    border: 1px solid var(--line); border-radius: 999px; padding: .4rem .9rem; font-size: .95rem;
+  }
+  nav.jump a:hover { border-color: var(--link); color: var(--link); }
+
+  /* Sections */
+  section { margin-top: 2.5rem; scroll-margin-top: 1rem; }
+  .sec-head { display: flex; align-items: center; gap: .65rem; margin-bottom: .85rem; }
+  .sec-icon {
+    width: 34px; height: 34px; border-radius: 10px; flex: none;
+    display: grid; place-items: center; background: var(--ink); color: var(--mint);
+  }
+  section h2 { font-size: 1.3rem; letter-spacing: -.015em; margin: 0; }
+
+  .faq {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  details + details { border-top: 1px solid var(--line); }
+  summary {
+    list-style: none; cursor: pointer; font-weight: 600;
+    padding: 1rem 3rem 1rem 1.15rem; position: relative;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: ""; position: absolute; right: 1.25rem; top: 50%;
+    width: .55rem; height: .55rem; margin-top: -.4rem;
+    border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+    transform: rotate(45deg); transition: transform .2s ease;
+  }
+  details[open] summary::after { transform: rotate(-135deg); margin-top: -.1rem; }
+  summary:hover { color: var(--link); }
+  summary:focus-visible { outline: 2px solid var(--link); outline-offset: -2px; border-radius: 12px; }
+  .answer { padding: 0 1.15rem 1.1rem; }
+  .answer p { margin: 0 0 .7rem; }
+  .answer p:last-child { margin-bottom: 0; }
+  .say {
+    display: block; background: var(--bg); border-radius: 10px; padding: .65rem .85rem;
+    font-style: italic; margin: .6rem 0;
+  }
+  .steps { margin: 0; padding-left: 1.2rem; }
+  .steps li { margin: .2rem 0; }
+
+  .tip {
+    background: var(--tip); border: 1px solid var(--tip-line); border-radius: 14px;
+    padding: .9rem 1.1rem; margin-top: .85rem; font-size: .97rem;
+  }
+  .tip strong { display: block; margin-bottom: .15rem; }
+
+  .note {
+    margin-top: 2.5rem; padding: 1.15rem 1.25rem; border-radius: 16px;
+    border: 1px dashed var(--line); color: var(--muted);
+  }
+  .note h2 { color: var(--fg); font-size: 1.05rem; margin: 0 0 .35rem; }
+  .note p { margin: 0; }
+
+  footer {
+    margin: 3rem 0 0; padding: 1.5rem 0 3rem; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: .92rem; display: flex; flex-wrap: wrap; gap: .4rem 1.1rem;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--link); }
 </style>
 </head>
 <body>
-<main>
-  <h1>Talkbill Support</h1>
-  <p class="sub">Speak the job, get the invoice.</p>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <img src="icon.png" alt="" width="44" height="44">
+      <a href="index.html">Talkbill <span>Support</span></a>
+    </div>
+    <h1>Say the job.<br><em>Get the invoice.</em></h1>
+    <p class="lead">Answers to the questions people actually ask — and a real person if they don't help.</p>
+  </div>
+</header>
+
+<main class="wrap">
 
   <div class="contact">
-    <strong>Email:</strong>
-    <a href="mailto:kaygusuzmir79@gmail.com">kaygusuzmir79@gmail.com</a><br>
-    A real person reads these. If something came out wrong on an invoice, the fastest
-    fix is below — send the debug report, not a screenshot.
+    <h2>Talk to a person</h2>
+    <p>Every message is read by a person, not a bot. Most answers are below — if yours isn't,
+      write to us and we'll get back to you.</p>
+    <a class="btn" href="#contact">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+      <span>Send us a message</span>
+    </a>
   </div>
 
-  <h2>Getting a good result</h2>
+  <nav class="jump" aria-label="On this page">
+    <a href="#good-result">Getting a good result</a>
+    <a href="#problems">Problems</a>
+    <a href="#billing">Billing</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  <details>
-    <summary>How should I say a job?</summary>
-    <p>
-      Talk the way you'd tell a mate. Say who it's for, what you did, and what it
-      costs: <em>"Invoice for Sarah Mitchell. Kitchen sink repair, parts eighty five
-      dollars, labour two hours at ninety five an hour."</em>
-    </p>
-    <p>
-      Saying "at" before an hourly rate ("two hours <em>at</em> ninety five") removes
-      most ambiguity — without it, Talkbill often has to ask whether you meant two
-      items or one.
-    </p>
-  </details>
+  <section id="good-result">
+    <div class="sec-head">
+      <div class="sec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></div>
+      <h2>Getting a good result</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>How should I say a job?</summary>
+        <div class="answer">
+          <p>Talk the way you'd tell a mate. Say who it's for, what you did, and what it costs:</p>
+          <span class="say">"Invoice for Sarah Mitchell. Kitchen sink repair, parts eighty five dollars,
+            labour two hours at ninety five an hour."</span>
+          <p>Saying "at" before an hourly rate ("two hours <em>at</em> ninety five") removes most
+            ambiguity — without it, Talkbill often has to ask whether you meant two items or one.</p>
+        </div>
+      </details>
+      <details>
+        <summary>I said the wrong number. Can I correct myself out loud?</summary>
+        <div class="answer">
+          <p>Yes. Say <em>"actually, make that three hours"</em> or <em>"no wait, eighty dollars"</em>
+            and Talkbill changes the line instead of adding a new one. If it can't tell what you
+            meant to change, it asks rather than guessing.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I do several jobs in one go?</summary>
+        <div class="answer">
+          <p>Yes. Start each one with "Invoice for &lt;name&gt;" and Talkbill splits the recording
+            into separate invoices for separate customers.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Why is a line marked "Needs review"?</summary>
+        <div class="answer">
+          <p>Because Talkbill wasn't certain, and it will not quietly send an invoice it isn't sure
+            about. "Two smoke alarms thirty five dollars" could be 2 × $35 or a single $35 — so it
+            shows both and you tap the right one. A document with an open question can't be sent
+            until you answer it.</p>
+        </div>
+      </details>
+    </div>
+  </section>
 
-  <details>
-    <summary>I said the wrong number. Can I correct myself out loud?</summary>
-    <p>
-      Yes. Say <em>"actually, make that three hours"</em> or <em>"no wait, eighty
-      dollars"</em> and Talkbill changes the line instead of adding a new one. If it
-      can't tell what you meant to change, it asks rather than guessing.
-    </p>
-  </details>
+  <section id="problems">
+    <div class="sec-head">
+      <div class="sec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5a1.8 1.8 0 0 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.5-.5-.5-2.5z"/></svg></div>
+      <h2>Problems</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>It isn't hearing me</summary>
+        <div class="answer">
+          <p>Check that Talkbill has microphone access in iOS Settings → Privacy &amp; Security →
+            Microphone. On a noisy site, hold the phone closer and speak in short sentences — pause
+            briefly between line items.</p>
+        </div>
+      </details>
+      <details>
+        <summary>"Language pack not ready"</summary>
+        <div class="answer">
+          <p>iOS downloads the on-device speech pack once, over Wi-Fi, and keeps it. Connect to
+            Wi-Fi and try again. Once it's installed, Talkbill works with no signal at all.</p>
+        </div>
+      </details>
+      <details>
+        <summary>The invoice came out wrong</summary>
+        <div class="answer">
+          <ol class="steps">
+            <li>Correct it on the draft before you send — every line, quantity and price can be
+              edited.</li>
+            <li><a href="#contact">Send us</a> the sentence you said, as close as you remember it,
+              and a screenshot of what came out.</li>
+          </ol>
+          <div class="tip">
+            <strong>Why the sentence matters</strong>
+            Talkbill turns your words into lines on your phone, and we never see your invoices.
+            The exact words are what let us reproduce the mistake and fix it for good.
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>My invoices aren't on my other device</summary>
+        <div class="answer">
+          <p>Open the <strong>Business</strong> tab in Talkbill and check the
+            <strong>iCloud sync</strong> line. If it says Off, sign in to iCloud on the device. Talkbill works fine without it — everything
+            simply stays on that one phone.</p>
+        </div>
+      </details>
+    </div>
+  </section>
 
-  <details>
-    <summary>Can I do several jobs in one go?</summary>
-    <p>
-      Yes. Start each one with "Invoice for &lt;name&gt;" and Talkbill splits the
-      recording into separate invoices for separate customers.
-    </p>
-  </details>
+  <section id="billing">
+    <div class="sec-head">
+      <div class="sec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></div>
+      <h2>Billing</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>What's free?</summary>
+        <div class="answer">
+          <p>Making, editing and previewing invoices, reading your archive, resending an invoice you
+            already sent, marking invoices paid, and exporting to PDF or CSV are never locked,
+            subscription or not. Sending a new invoice or estimate needs Pro — if you haven't had a
+            trial before, the yearly plan starts with 3 days free.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I cancel?</summary>
+        <div class="answer">
+          <p>iOS Settings → tap your name → Subscriptions → Talkbill → Cancel. One tap, no email to
+            write, nothing to ask us for. Cancelling never deletes your invoices.</p>
+        </div>
+      </details>
+      <details>
+        <summary>I bought Lifetime and it's not showing</summary>
+        <div class="answer">
+          <p>Open the <strong>Business</strong> tab and tap <strong>Restore purchases</strong> on the
+            Talkbill Pro card, signed in to the same Apple account you bought with. If it still
+            doesn't appear, <a href="#contact">send us a message</a>.</p>
+        </div>
+      </details>
+    </div>
+  </section>
 
-  <details>
-    <summary>Why is a line marked "Needs review"?</summary>
-    <p>
-      Because Talkbill wasn't certain, and it will not quietly send an invoice it
-      isn't sure about. "Two smoke alarms thirty five dollars" could be 2 × $35 or a
-      single $35 — so it shows both and you tap the right one. A document with an
-      open question can't be sent until you answer it.
-    </p>
-  </details>
+  <section class="contact form-card" id="contact">
+    <div class="sent" id="sent" hidden>
+      <strong>Message sent — thank you.</strong>
+      We'll reply to the email you gave us.
+    </div>
+    <h2>Send us a message</h2>
+    <p>If an invoice came out wrong, write the sentence you said and what came out — that's
+      how a one-off mistake becomes a permanent fix.</p>
 
-  <h2>Problems</h2>
+    <form id="contact-form" action="https://formsubmit.co/boldeditsupport@gmail.com" method="POST"
+          enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Talkbill support">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next"
+             value="https://mirbedirhankaygusuz.github.io/talkbill-site/support.html?sent=1#contact">
+      <input type="hidden" name="_replyto" id="replyto" value="">
+      <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-  <details>
-    <summary>It isn't hearing me</summary>
-    <p>
-      Check that Talkbill has microphone access in iOS Settings → Privacy &amp;
-      Security → Microphone. On a noisy site, hold the phone closer and speak in short
-      sentences — pause briefly between line items.
-    </p>
-  </details>
+      <label for="f-email">Your email</label>
+      <input id="f-email" type="email" name="email" required autocomplete="email"
+             placeholder="you@example.com">
+      <span class="hint">We reply here, and use it for nothing else.</span>
 
-  <details>
-    <summary>"Language pack not ready"</summary>
-    <p>
-      iOS downloads the on-device speech pack once, over Wi-Fi, and keeps it. Connect
-      to Wi-Fi and try again. Once it's installed, Talkbill works with no signal at
-      all.
-    </p>
-  </details>
+      <label for="f-topic">What's it about?</label>
+      <select id="f-topic" name="topic">
+        <option>An invoice came out wrong</option>
+        <option>Billing or subscription</option>
+        <option>Something isn't working</option>
+        <option>A question or an idea</option>
+      </select>
 
-  <details>
-    <summary>The invoice came out wrong</summary>
-    <p>
-      On a draft, scroll to the bottom and tap <strong>Copy debug report</strong>, then
-      paste it into an email to us. It contains exactly what was heard and what was
-      extracted — that's far more useful than a screenshot, and it usually becomes a
-      permanent fix rather than a one-off answer.
-    </p>
-  </details>
+      <label for="f-message">Message</label>
+      <textarea id="f-message" name="message" rows="5" required
+                placeholder="What happened? If an invoice came out wrong, write the sentence you said."></textarea>
 
-  <details>
-    <summary>My invoices aren't on my other device</summary>
-    <p>
-      Open Settings inside Talkbill and check the <strong>iCloud sync</strong> line. If
-      it says Off, sign in to iCloud on the device. Talkbill works fine without it —
-      everything simply stays on that one phone.
-    </p>
-  </details>
+      <label for="f-file">Screenshot <span class="opt">(optional)</span></label>
+      <input id="f-file" type="file" name="attachment" accept="image/*">
+      <span class="hint" id="file-hint">An image, up to 10 MB.</span>
 
-  <h2>Billing</h2>
+      <button type="submit" class="btn" id="f-send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+        <span>Send message</span>
+      </button>
+      <p class="fine">Messages are delivered by FormSubmit. See the
+        <a href="privacy.html#contact-form">Privacy Policy</a> for what happens to them.</p>
+    </form>
+  </section>
 
-  <details>
-    <summary>What's free?</summary>
-    <p>
-      Making, editing and previewing invoices, reading your archive, resending an
-      invoice you already sent, marking invoices paid, and exporting to PDF or CSV are
-      never locked, subscription or not. Sending a new invoice or estimate needs Pro —
-      if you haven't had a trial before, the yearly plan starts with 3 days free.
-    </p>
-  </details>
-
-  <details>
-    <summary>How do I cancel?</summary>
-    <p>
-      iOS Settings → tap your name → Subscriptions → Talkbill → Cancel. One tap, no
-      email to write, nothing to ask us for. Cancelling never deletes your invoices.
-    </p>
-  </details>
-
-  <details>
-    <summary>I bought Lifetime and it's not showing</summary>
-    <p>
-      Open the paywall and tap <strong>Restore</strong>, signed in to the same Apple
-      account you bought with. If it still doesn't appear, email us.
-    </p>
-  </details>
-
-  <h2>What Talkbill doesn't do</h2>
-  <p>
-    Talkbill writes invoices and tracks what you're owed. It does not do your taxes,
-    doesn't connect to your bank, and doesn't give financial advice. Any tax or
-    discount percentage on an invoice is the one you said out loud.
-  </p>
+  <div class="note">
+    <h2>What Talkbill doesn't do</h2>
+    <p>Talkbill writes invoices and tracks what you're owed. It does not do your taxes, doesn't
+      connect to your bank, and doesn't give financial advice. Any tax or discount percentage on an
+      invoice is the one you said out loud.</p>
+  </div>
 
   <footer>
-    Talkbill · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a>
+    <span>Talkbill</span>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+    <a href="#contact">Contact support</a>
   </footer>
 </main>
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    if (/[?&]sent=1/.test(location.search)) document.getElementById('sent').hidden = false;
+    var file = document.getElementById('f-file');
+    var hint = document.getElementById('file-hint');
+    var MAX = 10 * 1024 * 1024;
+    function tooBig() { return file.files.length > 0 && file.files[0].size > MAX; }
+    file.addEventListener('change', function () {
+      var big = tooBig();
+      hint.textContent = big ? 'That image is over 10 MB — please pick a smaller one.' : 'An image, up to 10 MB.';
+      hint.classList.toggle('err', big);
+    });
+    form.addEventListener('submit', function (e) {
+      if (tooBig()) { e.preventDefault(); file.focus(); return; }
+      document.getElementById('replyto').value = document.getElementById('f-email').value;
+      var b = document.getElementById('f-send');
+      b.disabled = true; b.querySelector('span').textContent = 'Sending…';
+    });
+    window.addEventListener('pageshow', function () {
+      var b = document.getElementById('f-send');
+      b.disabled = false; b.querySelector('span').textContent = 'Send message';
+    });
+  })();
+</script>
+
 </body>
 </html>
